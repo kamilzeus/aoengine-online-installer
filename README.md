@@ -28,8 +28,8 @@ It’s a community-driven solution for anyone tired of manual file management.
 
 
 ## Important Note
-**Backup:** Your files are backed up in the `backup of overwritten files` folder created by the script.
-**Requirements:** Requires modern Windows (10 1803+ / 11) for the `tar.exe` utility.
+* **Backup:** Your files are backed up in the `backup of overwritten files` folder created by the script.
+* **Requirements:** Requires modern Windows (10 1803+ / 11) for the `tar.exe` utility.
 
 
 ## Credits
