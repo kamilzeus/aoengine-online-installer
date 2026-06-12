@@ -1,4 +1,5 @@
 # AOEngine Online Installer
+Disclaimer: Not affiliated with the AOEngine team.
 
 Automated deployment and configuration pipeline for the AOEngine project. Designed to handle downloads, file backups, and environment setup for S.T.A.L.K.E.R. Anomaly, ensuring a clean and efficient installation, for advanced modpacks as well..
 
@@ -20,6 +21,11 @@ Automated deployment and configuration pipeline for the AOEngine project. Design
 ```powershell
     powershell -ExecutionPolicy Bypass -File .\AOEngine-Online-Installer.ps1
 ```
+
+## Why this script?
+Designed to automate the repetitive manual installation process, minimize user error, and ensure safe backups of critical files.
+It’s a community-driven solution for anyone tired of manual file management.
+
 
 ## Important Note
 **Backup:** Your files are backed up in the `backup of overwritten files` folder created by the script.
