@@ -1,5 +1,5 @@
 # AOEngine Online Installer
-Disclaimer: Not affiliated with the AOEngine team.
+*Disclaimer: Not affiliated with the AOEngine team.*
 
 Automated deployment and configuration pipeline for the AOEngine project. Designed to handle downloads, file backups, and environment setup for S.T.A.L.K.E.R. Anomaly, ensuring a clean and efficient installation, for advanced modpacks as well..
 
