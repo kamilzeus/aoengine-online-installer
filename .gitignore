@@ -1,0 +1,8 @@
+AOEOI_Log.txt
+AOEngineNeeded/
+backup of overwritten files/
+*.tmp
+*.bak
+del.bat
+.DS_Store
+Thumbs.db
