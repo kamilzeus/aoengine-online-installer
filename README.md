@@ -12,9 +12,9 @@ Automated deployment and configuration pipeline for the AOEngine project. Design
 1. Place `AOEngine-Online-Installer.ps1` in your main **Anomaly** directory.
 2. Open PowerShell in that folder (Right-click -> "Open in Terminal").
 3. Execute the script:
-   ```powershell
+```powershell
     .\AOEngine-Online-Installer.ps1
-   ```
+```
 
 *Note: If Windows blocks the script execution, use this command instead:*
 ```powershell
