@@ -4,7 +4,7 @@ Automated deployment and configuration pipeline for the AOEngine project. Design
 
 ## Features
 * **Automated Pipeline:** Fetches the latest AOEngine binaries and required resources.
-* **Smart Backup:** Automatically backs up `bin`, `appdata\savedgames`, and preserves your original `gamedata` folder (renamed to `gamedata_orig`).
+* **Smart Backup:** Automatically backs up `bin`, `appdata\savedgames`,`appdata\user.ltx` and preserves your original `gamedata` folder (renamed to `gamedata_orig`).
 * **Integrity Validation:** Verifies the target environment to prevent installation errors.
 * **Cleanup:** Clears temporary files and shader cache for a fresh, stable start.
 
