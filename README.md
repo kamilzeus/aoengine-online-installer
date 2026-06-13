@@ -27,8 +27,8 @@ Designed to automate the repetitive manual installation process, minimize user e
 It’s a community-driven solution for anyone tired of manual file management.
 
 ## Will this ruin my PC?
-No. Copy/Paste this into some AI and it'll give you the same answer.
-
+No. Copy/paste this script into any AI and it will give you the exact same answer.
+The code is 100% transparent and open-source - it does exactly what it's supposed to do. It does NOT download viruses, it does NOT touch your system files, and it automatically creates backups of your game files before making any changes.
 
 ## Important Note
 * **Backup:** Your files are backed up in the `backup of overwritten files` folder created by the script.
