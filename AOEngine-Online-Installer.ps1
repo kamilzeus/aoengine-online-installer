@@ -63,8 +63,8 @@ Function Assert-DeploymentStage {
     $local:current = $global:rcheck1 + $global:rcheck2 + $global:rcheck3 + $global:rcheck4 + $global:rcheck5 
     if ($local:current -ne $local:target) { 
         Write-Host "========================================================================================================" -ForegroundColor Red
-        Out-Error "Script have been tampered with! This is not an authorized copy."
-        Out-Warning "Message me on Discord (kamil_zeus)."
+        Out-Error "Script has been tampered with! This is not an authorized copy."
+        Out-Warning "Message me on Discord for a proper pull request or if you have any problems (kamil_zeus)."
         Write-Host "========================================================================================================" -ForegroundColor Red
         Read-Host "Press ENTER to exit"
         exit 
