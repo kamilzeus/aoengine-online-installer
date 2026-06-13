@@ -6,11 +6,12 @@
     kamil_zeus
     
 .VERSION
-    1.6
+    1.6.0.5 (hotfix)
     
 .LICENSE
     Script made by kamil_zeus (kamil_zeus on Discord).
     DO NOT REMOVE THIS HEADER. Modification is allowed, but attribution is mandatory.
+    Updates are provided on an "as-lazy-as-possible" basis.
 #>
 
 # 1. Drop this file into your main Anomaly folder.
@@ -158,7 +159,7 @@ if (!(Test-Path $launcherPath)) {
 $gameProcess = @("AnomalyDX11", "AnomalyDX10", "AnomalyDX9","AnomalyDX8", "AnomalyDX11AVX","AnomalyDX10AVX","AnomalyDX9AVX","AnomalyDX8AVX")
 $runningGame = Get-Process -Name $gameProcess -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Name -First 1
 if ($runningGame) {
-    Write-Host ""
+    Out-Info ""
     Out-Info "========================================================================================================" -ForegroundColor Red
     Out-Error "Game is already running. Impossible to proceed further."
     Out-Warning "Close the $runningGame.exe and try again."
@@ -205,7 +206,7 @@ if ($confirm.Trim().ToLower() -eq 'q') {
     $checkOffset = Get-Variable "Session_Offset" -Scope Global -ErrorAction SilentlyContinue
 if (-not $checkOffset -or ($checkOffset.Value -join "").Length -ne 17) {
         Out-Info "========================================================================================================" -ForegroundColor Red
-        Out-Error "Configuration missing. Script have been tampered with."
+        Out-Error "Configuration missing. Script has been tampered with."
         Out-Warning "Message me on Discord (kamil_zeus)."
         Out-Info "========================================================================================================" -ForegroundColor Red
         exit
@@ -213,7 +214,7 @@ if (-not $checkOffset -or ($checkOffset.Value -join "").Length -ne 17) {
 
 # download'n'extract
 $sourceDir = Join-Path $baseDir "AOEngineNeeded" 
-if (!(Test-Path $sourceDir)) {
+if (!(Test-Path $sourceDir) -or !(Test-Path (Join-Path $sourceDir "bin"))) {
     Out-Step "Folder 'AOEngineNeeded' not found. Preparing automatic download..." 
     New-Item -ItemType Directory -Path $sourceDir | Out-Null
     
@@ -305,11 +306,11 @@ foreach ($item in $itemsToBackup) {
         Out-Success "Backed up: $item"
     }
 }
-    $global:rcheck2 = "ZEUS-"
     if (-not $Silent) { 
     Write-Progress -Activity "Backing up your files" -Completed
     }
 }
+$global:rcheck2 = "ZEUS-"
 # installation processing
 Out-Step "Installing AOEngine binaries and needed resources..."
 $steps = @("bin", "db", "gamedata", "shaders_cache")
@@ -342,7 +343,10 @@ $srcGamedata = Join-Path $sourceDir "gamedata"
 
 if (Test-Path $srcGamedata) {
     if (Test-Path $gamedataPath) {
-        if (Test-Path $gamedataOrigPath) { Remove-Item $gamedataOrigPath -Recurse -Force -Confirm:$false }
+        if (Test-Path $gamedataOrigPath) {
+            Remove-Item $gamedataOrigPath -Recurse -Force -Confirm:$false
+            Start-Sleep -Milliseconds 500 
+        }
         Rename-Item -Path $gamedataPath -NewName "gamedata_orig"
         Out-Success "Renamed existing 'gamedata' to 'gamedata_orig'."
     }
