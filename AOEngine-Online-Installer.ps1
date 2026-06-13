@@ -177,7 +177,6 @@ if (!(Test-Path $sourceDir)) {
         } else {
             Out-Step "Searching for folder: '$($file.SearchedFolder)'..." 
             $foundFolder = Get-ChildItem -Path $tempExtract -Recurse -Directory | Where-Object { $_.Name -eq $file.SearchedFolder } | Select-Object -First 1
-            
             if ($foundFolder) {
                 $destinationFolder = Join-Path $sourceDir $file.SearchedFolder
                 Move-Item -Path $foundFolder.FullName -Destination $destinationFolder -Force
@@ -202,7 +201,6 @@ if (!(Test-Path $sourceDir)) {
 # backup processing
 $backupDir = Join-Path $baseDir "backup of overwritten files"
 if (!(Test-Path $backupDir)) { New-Item -ItemType Directory -Path $backupDir | Out-Null }
-
 Out-Step "Backing up crucial files to: $backupDir" 
 $itemsToBackup = @("bin", "appdata\savedgames","appdata\user.ltx")
 $totalItems = $itemsToBackup.Count
@@ -211,7 +209,6 @@ $i = 0
 foreach ($item in $itemsToBackup) {
     $i++
     Write-Progress -Activity "Backing up your files" -Status "Currently backing up: $item" -PercentComplete (($i / $totalItems) * 100)
-    
     $itemPath = Join-Path $baseDir $item
     if (Test-Path $itemPath) {
         $destPath = Join-Path $backupDir $item
@@ -229,15 +226,13 @@ Out-Step "Installing AOEngine binaries and needed resources..."
 $steps = @("bin", "db", "gamedata", "shaders_cache")
 $totalSteps = $steps.Count
 $currentStep = 0
-
 $foldersToUpdate = @("bin", "db")
+
 foreach ($folder in $foldersToUpdate) {
     $currentStep++
     Write-Progress -Activity "Installing AOEngine" -Status "Installing: $folder" -PercentComplete (($currentStep / $totalSteps) * 100)
-    
     $srcPath = Join-Path $sourceDir $folder
     $destPath = Join-Path $baseDir $folder
-    
     if (Test-Path $srcPath) {
         if (!(Test-Path $destPath)) { New-Item -ItemType Directory -Path $destPath | Out-Null }
         Copy-Item -Path $srcPath -Destination $baseDir -Recurse -Force
@@ -247,7 +242,6 @@ foreach ($folder in $foldersToUpdate) {
 
 $currentStep++
 Write-Progress -Activity "Installing AOEngine" -Status "Configuring: gamedata" -PercentComplete (($currentStep / $totalSteps) * 100)
-
 $gamedataPath = Join-Path $baseDir "gamedata"
 $gamedataOrigPath = Join-Path $baseDir "gamedata_orig"
 $srcGamedata = Join-Path $sourceDir "gamedata"
@@ -264,8 +258,8 @@ if (Test-Path $srcGamedata) {
 
 $currentStep++
 Write-Progress -Activity "Installing AOEngine" -Status "Deleting shader cache..." -PercentComplete (($currentStep / $totalSteps) * 100)
-
 $cachePath = Join-Path $baseDir "appdata\shaders_cache"
+
 if (Test-Path $cachePath) {
     Remove-Item -Path $cachePath -Recurse -Force -Confirm:$false
     Out-Success "Deleted 'shaders_cache'."
@@ -273,6 +267,7 @@ if (Test-Path $cachePath) {
 
 Write-Host ""
 Out-Step "Cleaning up installation files..."
+
 if (Test-Path $sourceDir) {
     Remove-Item -Path $sourceDir -Recurse -Force -Confirm:$false
     Out-Success "Folder 'AOEngineNeeded' has been removed."
