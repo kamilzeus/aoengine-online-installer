@@ -58,7 +58,7 @@ Function Out-Error {
     Write-Host "[X] $text" -ForegroundColor Red
     [Console]::Beep(300, 600)
 }
-Function Reality {
+Function Assert-DeploymentStage {
     $local:target = ($global:Session_Offset -join "")
     $local:current = $global:rcheck1 + $global:rcheck2 + $global:rcheck3 + $global:rcheck4 + $global:rcheck5 
     if ($local:current -ne $local:target) { 
@@ -288,7 +288,7 @@ $currentStep++
 Write-Progress -Activity "Installing AOEngine" -Status "Deleting shader cache..." -PercentComplete (($currentStep / $totalSteps) * 100)
 $cachePath = Join-Path $baseDir "appdata\shaders_cache"
 $global:rcheck5 = "ENG"
-Reality
+Assert-DeploymentStage
 if (Test-Path $cachePath) {
     Remove-Item -Path $cachePath -Recurse -Force -Confirm:$false
     Out-Success "Deleted 'shaders_cache'."
