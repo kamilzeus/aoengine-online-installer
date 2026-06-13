@@ -6,7 +6,7 @@
     kamil_zeus
     
 .VERSION
-    1.5.1.2
+    1.5.1.3
     
 .LICENSE
     Script made by kamil_zeus (kamil_zeus on Discord).
