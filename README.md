@@ -26,6 +26,9 @@ Automated deployment and configuration pipeline for the AOEngine project. Design
 Designed to automate the repetitive manual installation process, minimize user error, and ensure safe backups of critical files.
 It’s a community-driven solution for anyone tired of manual file management.
 
+## Will this ruin my PC?
+No. Copy/Paste this into some AI and it'll give you the same answer.
+
 
 ## Important Note
 * **Backup:** Your files are backed up in the `backup of overwritten files` folder created by the script.
