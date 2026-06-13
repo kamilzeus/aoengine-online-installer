@@ -6,8 +6,8 @@
     kamil_zeus
     
 .VERSION
-    1.5.1
-
+    1.5.1.2
+    
 .LICENSE
     Script made by kamil_zeus (kamil_zeus on Discord).
     DO NOT REMOVE THIS HEADER. Modification is allowed, but attribution is mandatory.
