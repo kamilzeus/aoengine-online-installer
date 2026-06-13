@@ -6,10 +6,7 @@
     kamil_zeus
     
 .VERSION
-    1.5
-
-.SIGNATURE
-    SHA-256: 8F9979DC736CD6D530DE1AAE0DB88161356AC2DE8CCA53817ADBED6A83379ECC
+    1.5.1
 
 .LICENSE
     Script made by kamil_zeus (kamil_zeus on Discord).
@@ -94,6 +91,19 @@ if (!(Test-Path $launcherPath)) {
     Write-Host "========================================================================================================" -ForegroundColor Red
     Out-Error "This is NOT an Anomaly directory."
     Out-Warning "Make sure this installer is placed and executed inside your main Anomaly folder." 
+    Write-Host "========================================================================================================" -ForegroundColor Red
+    Write-Host ""
+    Read-Host "Press ENTER to exit"
+    exit
+}
+
+# i respect murphy's law even more
+$gameProcess = "AnomalyDX11" 
+if (Get-Process -Name $gameProcess -ErrorAction SilentlyContinue) {
+    Write-Host ""
+    Write-Host "========================================================================================================" -ForegroundColor Red
+    Out-Error "Game is already running. Impossible to proceed further."
+    Out-Warning "Close the $gameProcess and try again."
     Write-Host "========================================================================================================" -ForegroundColor Red
     Write-Host ""
     Read-Host "Press ENTER to exit"
