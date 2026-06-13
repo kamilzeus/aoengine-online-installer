@@ -35,12 +35,12 @@
  #Write-Host "[!] Mock environment active: Simulated base files generated for testing."
 
 # ========================================================================================================
+
 Function Out-Step {
     param([string]$text)
     Write-Host "[>] $text" -ForegroundColor Cyan
     [Console]::Beep(2200, 20)
 }
-
 Function Out-Success {
     param([string]$text)
     Write-Host "[+] $text" -ForegroundColor Green
@@ -58,6 +58,19 @@ Function Out-Error {
     Write-Host "[X] $text" -ForegroundColor Red
     [Console]::Beep(300, 600)
 }
+Function Reality {
+    $local:target = ($global:Session_Offset -join "")
+    $local:current = $global:rcheck1 + $global:rcheck2 + $global:rcheck3 + $global:rcheck4 + $global:rcheck5 
+    if ($local:current -ne $local:target) { 
+        Write-Host "========================================================================================================" -ForegroundColor Red
+        Out-Error "Script have been tampered with! This is not an authorized copy."
+        Out-Warning "Message me on Discord (kamil_zeus)."
+        Write-Host "========================================================================================================" -ForegroundColor Red
+        Read-Host "Press ENTER to exit"
+        exit 
+    }
+}
+
 Start-Transcript -Path "AOEOI_Log.txt" -Append -Force
 
 # early environment and system age validation
@@ -82,6 +95,7 @@ if (!(Get-Command "tar" -ErrorAction SilentlyContinue)) {
 # path and folder integrity check
 Out-Step "Verifying target environment..."
 $baseDir = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Definition }
+$global:Session_Offset = @("13-", "ZEUS-", "37-", "AO-", "ENG")
 Start-Sleep -Milliseconds 400
 
 # anomaly folder validation
@@ -139,6 +153,16 @@ if ($confirm.Trim().ToLower() -eq 'q') {
     Start-Sleep -Seconds 2
     exit
 }
+
+    $checkOffset = Get-Variable "Session_Offset" -Scope Global -ErrorAction SilentlyContinue
+if (-not $checkOffset -or ($checkOffset.Value -join "").Length -ne 21) {
+        Write-Host "========================================================================================================" -ForegroundColor Red
+        Out-Error "Configuration missing. Script have been tampered with."
+        Out-Warning "Message me on Discord (kamil_zeus)."
+        Write-Host "========================================================================================================" -ForegroundColor Red
+        exit
+    }
+
 # download'n'extract
 $sourceDir = Join-Path $baseDir "AOEngineNeeded" 
 if (!(Test-Path $sourceDir)) {
@@ -157,7 +181,7 @@ if (!(Test-Path $sourceDir)) {
         Out-Step "Downloading: $($file.Output)..." 
         try {
             Invoke-WebRequest -Uri $file.Url -OutFile $targetPath -UserAgent "Mozilla/5.0"
-            Out-Success "Successfully downloaded $($file.Output)." 
+            Out-Success "Successfully downloaded $($file.Output)."
         }
         catch {
             Out-Error "Failed to download $($file.Output)." 
@@ -166,7 +190,6 @@ if (!(Test-Path $sourceDir)) {
         $tempExtract = Join-Path $sourceDir "temp_extract"
         if (!(Test-Path $tempExtract)) { New-Item -ItemType Directory -Path $tempExtract | Out-Null }
         Out-Step "Extracting $($file.Output) using tar.exe..." 
-
         tar -xf $targetPath -C $tempExtract
         
         if ($file.SearchedFolder -eq "binResources") {
@@ -174,6 +197,7 @@ if (!(Test-Path $sourceDir)) {
             if (!(Test-Path $destinationFolder)) { New-Item -ItemType Directory -Path $destinationFolder | Out-Null }
             Get-ChildItem -Path $tempExtract -File | Move-Item -Destination $destinationFolder -Force
             Out-Success "Successfully moved binaries into 'AOEngineNeeded\bin' folder." 
+            
         } else {
             Out-Step "Searching for folder: '$($file.SearchedFolder)'..." 
             $foundFolder = Get-ChildItem -Path $tempExtract -Recurse -Directory | Where-Object { $_.Name -eq $file.SearchedFolder } | Select-Object -First 1
@@ -184,7 +208,7 @@ if (!(Test-Path $sourceDir)) {
             } else {
                 Out-Error "Couldn't find '$($file.SearchedFolder)' folder inside the downloaded zip." 
             }
-        } 
+        }
 
         Start-Sleep -Seconds 1
 
@@ -193,10 +217,13 @@ if (!(Test-Path $sourceDir)) {
         Out-Success "Cleaned up temporary files for $($file.Output)."
         Write-Host "========================================================================================================" -ForegroundColor White
     }
-    
+    $global:rcheck1 = "13-"
+    $global:rcheck4 = "AO-" 
     Out-Success "All components downloaded and ready for install." 
 } else {
     Out-Warning "Found existing 'AOEngineNeeded' folder, skipping download. Better delete it and start all over again."
+    $global:rcheck1 = "13-"
+    $global:rcheck4 = "AO-"
 }
 # backup processing
 $backupDir = Join-Path $baseDir "backup of overwritten files"
@@ -205,7 +232,6 @@ Out-Step "Backing up crucial files to: $backupDir"
 $itemsToBackup = @("bin", "appdata\savedgames","appdata\user.ltx")
 $totalItems = $itemsToBackup.Count
 $i = 0
-
 foreach ($item in $itemsToBackup) {
     $i++
     Write-Progress -Activity "Backing up your files" -Status "Currently backing up: $item" -PercentComplete (($i / $totalItems) * 100)
@@ -216,9 +242,10 @@ foreach ($item in $itemsToBackup) {
         if (!(Test-Path $destParent)) { New-Item -ItemType Directory -Path $destParent | Out-Null }
         
         Copy-Item -Path $itemPath -Destination $destPath -Recurse -Force
-        Out-Success "Backed up: $item" 
+        Out-Success "Backed up: $item"
     }
 }
+    $global:rcheck2 = "ZEUS-"
     Write-Progress -Activity "Backing up your files" -Completed
 
 # installation processing
@@ -239,6 +266,7 @@ foreach ($folder in $foldersToUpdate) {
         Out-Success "Overwritten: $folder"
     }
 }
+$global:rcheck3 = "37-"
 
 $currentStep++
 Write-Progress -Activity "Installing AOEngine" -Status "Configuring: gamedata" -PercentComplete (($currentStep / $totalSteps) * 100)
@@ -259,7 +287,8 @@ if (Test-Path $srcGamedata) {
 $currentStep++
 Write-Progress -Activity "Installing AOEngine" -Status "Deleting shader cache..." -PercentComplete (($currentStep / $totalSteps) * 100)
 $cachePath = Join-Path $baseDir "appdata\shaders_cache"
-
+$global:rcheck5 = "ENG"
+Reality
 if (Test-Path $cachePath) {
     Remove-Item -Path $cachePath -Recurse -Force -Confirm:$false
     Out-Success "Deleted 'shaders_cache'."
