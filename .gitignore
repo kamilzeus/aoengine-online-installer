@@ -3,6 +3,7 @@ AOEngineNeeded/
 backup of overwritten files/
 *.tmp
 *.bak
+*.txt
 del.bat
 .DS_Store
 Thumbs.db
