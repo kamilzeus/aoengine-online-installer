@@ -17,7 +17,7 @@
     kamil_zeus
     
 .VERSION
-    1.8
+    1.8.1 (hotfix)
     
 .LICENSE
     Script made by kamil_zeus (kamil_zeus on Discord).
@@ -766,10 +766,12 @@ function CreateSnapshot {
 
 
 $ErrorActionPreference = if ($SilenceErrors) { 'SilentlyContinue' } else { 'Stop' }
-Set-StrictMode -Version Latest
+Set-StrictMode -Off
 Write-ToLog "AOEngine Online Installer started. Version: $($cfg.Version). Silent: $($cfg.IsSilent)."
 
 try {
+$ErrorActionPreference = "Stop"
+$PSDefaultParameterValues['*:ErrorAction'] = 'Stop'
 
 if ($Recovery) {
     try {
