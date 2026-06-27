@@ -1,8 +1,6 @@
-AOEOI_Log.txt
-AOEngineNeeded/
-backup of overwritten files/
 *.tmp
 *.bak
+*.log
 *.txt
 del.bat
 .DS_Store
