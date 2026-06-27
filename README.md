@@ -1,6 +1,6 @@
 # AOEngine Online Installer
 
-*Disclaimer: Not affiliated with the AOEngine team.*
+*Disclaimer: Not affiliated with the AOEngine team, at least not yet.*
 
 Automated deployment and configuration pipeline for the AOEngine project.
 
