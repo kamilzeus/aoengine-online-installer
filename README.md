@@ -10,6 +10,7 @@ Built with safety and reliability in mind, especially for large modpacks and Mod
 
 ---
 
+(see the changes in [CHANGELOG.md](CHANGELOG.md))
 ## Features
 
 * **Automated Installation Pipeline**
