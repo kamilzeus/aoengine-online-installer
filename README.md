@@ -3,7 +3,9 @@
 *Disclaimer: Not affiliated with the AOEngine team, at least not yet.*
 
 Automated deployment and configuration pipeline for the AOEngine project.
+
 Works with G.A.M.M.A flawlessly, not sure about other modpacks, they might have other requirements.
+
 Designed to simplify AOEngine installation for S.T.A.L.K.E.R. Anomaly by handling downloads, integrity checks, backups, installation, and recovery operations.
 
 Built with safety and reliability in mind, especially for large modpacks and Mod Organizer 2 based setups.
