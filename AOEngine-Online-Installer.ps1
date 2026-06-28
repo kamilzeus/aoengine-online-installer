@@ -17,7 +17,7 @@
     kamil_zeus
     
 .VERSION
-    1.8.1 (hotfix)
+    1.8.2 (hotfix)
     
 .LICENSE
     Script made by kamil_zeus (kamil_zeus on Discord).
@@ -268,7 +268,7 @@ Function Instructions {
     Clear-Host
     Write-ToLog "Displayed MO2 instructions"
     Microsoft.PowerShell.Utility\Write-Host "========================================================================================================" -ForegroundColor White
-    Microsoft.PowerShell.Utility\Write-Host (" " * 44 + "MO2 Instructions") -ForegroundColor Cyan
+    Microsoft.PowerShell.Utility\Write-Host (" " * 42 + "MO2 Instructions") -ForegroundColor Cyan
     Microsoft.PowerShell.Utility\Write-Host "========================================================================================================" -ForegroundColor White
     Microsoft.PowerShell.Utility\Write-Host "[!] Enable '236- 1st Person Visible Body Ported from SWM - Wang_Laoshi & SWM Team'." -ForegroundColor Yellow
     Microsoft.PowerShell.Utility\Write-Host "[!] Remove '05_gamma aoe fixes' from MO2 to prevent crashes!" -ForegroundColor Yellow
@@ -281,7 +281,7 @@ Function Instructions {
     Microsoft.PowerShell.Utility\Write-Host "    -> [ ] MANUAL INSTALLATION - MODDED EXE" -ForegroundColor Cyan
     Microsoft.PowerShell.Utility\Write-Host "[!] In the main menu, go to MCM Settings -> SWM Visible Body -> Scroll to the bottom -> Uncheck 'Remove body'." -ForegroundColor Yellow
     Microsoft.PowerShell.Utility\Write-Host "========================================================================================================" -ForegroundColor White
-    Microsoft.PowerShell.Utility\Write-Host (" " * 30 + "if i'll have an idea what to type here, i will") -ForegroundColor Magenta
+    Microsoft.PowerShell.Utility\Write-Host (" " * 8 + "By all means, do not remove the \.recovery folder unless you know what you're doing!") -ForegroundColor Red
     Microsoft.PowerShell.Utility\Write-Host "========================================================================================================" -ForegroundColor White
     Microsoft.PowerShell.Utility\Write-Host ""
 }
@@ -544,6 +544,10 @@ function Extraction {
 function TheRecovery {
 $gamedataBackupIsEmpty = $false
 Step "[Runtime Handler] Starting recovery (snapshot rollback)..."
+if (-not (Test-Path $cfg.RecoveryDir)) {
+    AnError "[Recovery Handler] Nothing to work with - Recovery folder missing: $($cfg.RecoveryDir)" -Hint "If you deleted the .recovery folder, restore it from the Recycle Bin if you can. I'm no miracle worker."
+    return
+}
 if (-not (Test-Path (Join-Path $cfg.BaseDir "AnomalyLauncher.exe"))) {
     AnError "[Recovery Handler] This is NOT an Anomaly directory." -Hint "What do you even want to recover?"
     return
