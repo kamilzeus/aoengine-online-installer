@@ -17,7 +17,7 @@
 
 - Added installation snapshots:
   - Creates `.recovery` before modifying game files.
-  - Saves important user files and AOEngine binaries.
+  - Saves important user files and original binaries.
 
 - Added new installer parameters:
   - `-TrustBanner` (`-TB`)
