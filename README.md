@@ -22,7 +22,7 @@ Built with safety and reliability in mind, especially for large modpacks and Mod
   * Creates a restore snapshot before installation.
   * Can recover previous files if something goes wrong.
   * Restores:
-    * AOEngine binaries
+    * binaries
     * `gamedata`
     * `appdata\savedgames`
     * `appdata\user.ltx`
