@@ -1,6 +1,6 @@
 # AOEngine Online Installer
 
-*Disclaimer: Not affiliated with the AOEngine team, at least not yet.*
+*Disclaimer: Not affiliated with the AOEngine team, at least not yet. If installer script doesn't work, don't ask them, ask ME. Contact is at the bottom of the page.*
 
 Automated deployment and configuration pipeline for the AOEngine project.
 
@@ -184,6 +184,6 @@ These are used for downloading, extraction, staging, and recovery purposes.
 
 # Credits
 
-Created with <3 by **kamil_zeus**
+Created with <3 by **kamil_zeus** (kamil_zeus on Discord.)
 
 Modifications are allowed, but please keep the original attribution.
